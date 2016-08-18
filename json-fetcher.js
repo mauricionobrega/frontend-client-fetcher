@@ -8,7 +8,7 @@ ns.jsonFetcher = (function($, window, document) {
       if (typeof fetcher.callbacks[i] === 'function') {
         fetcher.callbacks[i](fetcher.response);
       }
-      if (!fetcher.response && fetcher.ttl && fetcher.ttl > 0) { console.log('SET RESPONSE IN WS');
+      if (fetcher.response && fetcher.ttl && fetcher.ttl > 0) {
         ns.storage.set(fetcher.name, fetcher.response, fetcher.ttl);
       }
       fetcher.callbacks.splice(i, 1);
@@ -31,6 +31,16 @@ ns.jsonFetcher = (function($, window, document) {
   function get(url, ttl, callback) {
     var fetcher = fetchers[url],
         storage = ns.storage.get(url);
+
+    // VERIFY EXISTS IN STORAGE AND EXECUTE CALLBACK!
+    if (storage) {
+      if (typeof callback === 'function') {
+        callback(storage);
+      }
+      return;
+    };
+
+    // OH! NOT SEARCHED IN STORAGE, LETS TRY FETCHING IN SERVER!
     if (!register(url, callback)) {
       reqwest({
         url: url,
@@ -46,7 +56,7 @@ ns.jsonFetcher = (function($, window, document) {
           execute(fetchers[url]);
         }
       });
-    } else if (fetcher && fetcher.response) {
+    } else if (fetcher && fetcher.response) { // OR EXECUTE ON FETCHERS!
       execute(fetchers[url]);
     }
   };

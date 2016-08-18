@@ -13,19 +13,19 @@
 
   <script>
     ns.jsonFetcher.get('test.json', 2, function(response) {
-      console.log('test.json(01): ', response);
+      console.log(response.message, 'test.json');
     });
     ns.jsonFetcher.get('test.json', 1, function(response) {
-      console.log('test.json(02): ', response);
+      console.log(response.message, 'test.json');
     });
     ns.jsonFetcher.get('test.json?v=1', 1, function(response) {
-      console.log('test.json?v=1(01): ', response);
+      console.log(response.message, 'test.json?v=1');
     });
     ns.jsonFetcher.get('test.json?v=2', 1, function(response) {
-      console.log('test.json?v=2(01): ', response);
+      console.log(response.message, 'test.json?v=2');
     });
 
-    console.log('ns.storage.all: ', ns.storage.all);
+    // console.log('ns.storage.all: ', ns.storage.getAll());
   </script>
 </body>
 </html>

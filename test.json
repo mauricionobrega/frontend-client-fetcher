@@ -1,6 +1,3 @@
 {
-  "message": "What's your name?",
-  "description": "Ask for the user's name",
-  "hello": "Hello, $USER$",
-  "greet": "Greet the user"
+  "message": "My version is: "
 }
