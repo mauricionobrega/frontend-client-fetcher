@@ -8,7 +8,7 @@ ns.jsonFetcher = (function($, window, document) {
       if (typeof fetcher.callbacks[i] === 'function') {
         fetcher.callbacks[i](fetcher.response);
       }
-      if (fetcher.ttl && fetcher.ttl > 0) {
+      if (!fetcher.response && fetcher.ttl && fetcher.ttl > 0) { console.log('SET RESPONSE IN WS');
         ns.storage.set(fetcher.name, fetcher.response, fetcher.ttl);
       }
       fetcher.callbacks.splice(i, 1);
