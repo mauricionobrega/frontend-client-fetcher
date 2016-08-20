@@ -22,6 +22,7 @@ ns.storage = (function(ls, window, document) {
       window.localStorage.clear();
       return getAll();
     }
+    return undefined;
   };
 
   function init() {

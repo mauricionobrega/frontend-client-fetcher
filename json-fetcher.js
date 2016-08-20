@@ -42,12 +42,12 @@ ns.jsonFetcher = (function($, window, document) {
 
     // OH! NOT SEARCHED IN STORAGE, LETS TRY FETCHING IN SERVER!
     if (!register(url, callback)) {
-      reqwest({
+      ns.http.request({
         url: url,
         type: 'json',
         method: 'get',
         error: function (error) {
-          console.log('error: ', error);
+          console.log('[ERROR]: ', error);
         },
         success: function (response) {
           fetchers[url].response = response;

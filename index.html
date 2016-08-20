@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Demo</title>
-  <script>var ns = {};</script>
-</head>
-<body>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Demo JsonFetcher</title>
+    <!-- INITIALIZE NAMESPACE -->
+    <script>var ns = {};</script>
+  </head>
+  <body>
+  </body>
   <script src="reqwest.js"></script>
+  <script src="http.js"></script>
   <script src="lscache.js"></script>
   <script src="local-storage.js"></script>
   <script src="json-fetcher.js"></script>
+  <script src="i18n.js"></script>
 
   <script>
+    console.log( ns.i18n.getMessage('message') );
+/*
     ns.jsonFetcher.get('test.json', 2, function(response) {
-      console.log(response.message, 'test.json');
+      // console.log(response.message, 'test.json');
     });
     ns.jsonFetcher.get('test.json', 1, function(response) {
-      console.log(response.message, 'test.json');
+      // console.log(response.message, 'test.json');
     });
     ns.jsonFetcher.get('test.json?v=1', 1, function(response) {
-      console.log(response.message, 'test.json?v=1');
+      // console.log(response.message, 'test.json?v=1');
     });
     ns.jsonFetcher.get('test.json?v=2', 1, function(response) {
-      console.log(response.message, 'test.json?v=2');
+      // console.log(response.message, 'test.json?v=2');
     });
-
+*/
     // console.log('ns.storage.all: ', ns.storage.getAll());
   </script>
-</body>
 </html>
