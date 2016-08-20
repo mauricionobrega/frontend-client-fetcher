@@ -8,15 +8,17 @@
   </head>
   <body>
   </body>
-  <script src="reqwest.js"></script>
+  <script src="vendor/reqwest.js"></script>
+  <script src="vendor/lscache.js"></script>
+  <script src="vendor/gowiththeflow.js"></script>
+
   <script src="http.js"></script>
-  <script src="lscache.js"></script>
   <script src="local-storage.js"></script>
   <script src="json-fetcher.js"></script>
   <script src="i18n.js"></script>
 
   <script>
-    console.log( ns.i18n.getMessage('message') );
+    console.log('==> ', ns.i18n.getMessage('message') );
     console.log('depois');
 /*
     ns.jsonFetcher.get('test.json', 2, function(response) {
