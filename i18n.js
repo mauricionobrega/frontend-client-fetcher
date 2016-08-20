@@ -1,23 +1,26 @@
 ns.i18n = (function($, window, document) {
 
-  var componentUrl = 'test.json';
+  var componentUrl = 'test.json?v=1', messages = {};
 
   function get() {
-    ns.jsonFetcher.get(componentUrl, 2, function(response) {
-      return response;
-    });
+    return messages;
   };
 
   function getMessage(key) {
-    ns.jsonFetcher.get(componentUrl, 2, function(response) {
-      console.log(response[key]);
-      return response[key];
+    return messages[key];
+  };
+
+  function init() {
+    ns.jsonFetcher.get(componentUrl, 0, function(response) {
+      messages = response;
     });
+    return this;
   };
 
   return {
     getMessage: getMessage,
-    getMessages: get
+    getMessages: get,
+    init: init
   };
 
-})(undefined, window, window.document);
+})(undefined, window, window.document).init();
