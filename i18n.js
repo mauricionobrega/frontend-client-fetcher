@@ -7,12 +7,19 @@ ns.i18n = (function($, window, document) {
   };
 
   function getMessage(key) {
+    var message = '';
 
-      ns.jsonFetcher.get(componentUrl, 0, function(response) {
-        console.log('01', response);
-        next(response);
-      });
+    ns.jsonFetcher.get(componentUrl, 0, function(response) {
+      console.log('01', response[key]);
+      // next(response);
+      message = response[key];
+    });
 
+
+
+    console.log('message: ', message);
+
+    return message;
   };
 
   return {
