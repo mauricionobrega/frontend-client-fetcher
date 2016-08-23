@@ -5,14 +5,16 @@ ns.jsonFetcher = (function($, window, document) {
   function execute(fetcher) {
     var i = fetcher.callbacks.length;
     while (i--) {
-      if (typeof fetcher.callbacks[i] === 'function') {
-        fetcher.callbacks[i](fetcher.response);
-      }
       if (fetcher.response && fetcher.ttl && fetcher.ttl > 0) {
         ns.storage.set(fetcher.name, fetcher.response, fetcher.ttl);
       }
-      fetcher.callbacks.splice(i, 1);
+      if (typeof fetcher.callbacks[i] === 'function') {
+        var callback = fetcher.callbacks[i];
+        callback(fetcher.response);
+        fetcher.callbacks.splice(i, 1);
+      }
     }
+    return;
   };
 
   function register(url, callback) {
@@ -35,9 +37,8 @@ ns.jsonFetcher = (function($, window, document) {
     // VERIFY EXISTS IN STORAGE AND EXECUTE CALLBACK!
     if (storage) {
       if (typeof callback === 'function') {
-        callback(storage);
+        return callback(storage);
       }
-      return;
     };
 
     // OH! NOT SEARCHED IN STORAGE, LETS TRY FETCHING IN SERVER!
@@ -48,16 +49,17 @@ ns.jsonFetcher = (function($, window, document) {
         method: 'get',
         error: function (error) {
           console.log('[ERROR]: ', error);
+          return;
         },
         success: function (response) {
           fetchers[url].response = response;
           fetchers[url].ttl = ttl;
           fetchers[url].name = url;
-          execute(fetchers[url]);
+          return execute(fetchers[url]);
         }
       });
     } else if (fetcher && fetcher.response) { // OR EXECUTE ON FETCHERS!
-      execute(fetchers[url]);
+      return execute(fetchers[url]);
     }
   };
 
