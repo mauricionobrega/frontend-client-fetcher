@@ -9,20 +9,24 @@
 
   <body></body>
   <!-- VENDOR -->
-  <script src="vendor/reqwest.js"></script>
-  <script src="vendor/lscache.js"></script>
-  <!--<script src="vendor/gowiththeflow.js"></script>-->
+  <script src="js/vendor/reqwest.js"></script>
+  <script src="js/vendor/lscache.js"></script>
 
   <!-- IMPL -->
-  <script src="http.js"></script>
-  <script src="local-storage.js"></script>
-  <script src="json-fetcher.js"></script>
-  <!--<script src="i18n.js"></script>-->
+  <script src="js/http.js"></script>
+  <script src="js/local-storage.js"></script>
+  <script src="js/json-fetcher.js"></script>
+  <script src="js/i18n.js"></script>
 
   <script>
 
-    // console.log('==> ', ns.i18n.getMessage('message') );
-    // console.log('depois');
+    ns.i18n.getMessages(function(messages) {
+      console.log('ns.i18n.getMessages: ', messages);
+    });
+
+    ns.i18n.getMessage('message', function(message) {
+      console.log('ns.i18n.getMessage: ', message);
+    });
 
 
     ns.jsonFetcher.get('test.json', 2, function(response) {
@@ -37,6 +41,7 @@
     ns.jsonFetcher.get('test.json?v=2', 1, function(response) {
       console.log(response.message, 'test.json?v=2');
     });
+
 /*
     console.log('ns.storage.all: ', ns.storage.getAll());
 */
